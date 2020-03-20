@@ -171,6 +171,8 @@ public class ReentrantLockZk4 {
         //主线程阻塞，直到异步方法中判断前一个节点已经不存在
         if (timeout != null && timeout > 0) {
             block.await(timeout, TimeUnit.MILLISECONDS);
+        } else {
+            block.await();
         }
     }
 
