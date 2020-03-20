@@ -93,12 +93,12 @@ public class ReentrantLockZk2 {
         }
         builder.append(number);
         //异步执行，判断是否存在，并添加回调方法逻辑
-        zooKeeper.exists(builder.toString(), true, new lockCallBack(), countDownLatch);
+        zooKeeper.exists(builder.toString(), true, new LockCallBack(), countDownLatch);
         //主线程阻塞，直到异步方法中判断前一个节点已经不存在
         countDownLatch.await();
     }
 
-    private class lockCallBack implements AsyncCallback.StatCallback {
+    private class LockCallBack implements AsyncCallback.StatCallback {
 
         @Override
         public void processResult(int i, String s, Object o, Stat stat) {
